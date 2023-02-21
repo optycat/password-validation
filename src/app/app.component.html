@@ -1,10 +1,12 @@
 <div class="password-container">
-  <h2>Test task made by Pylypenko Alexey</h2>
-  <a href="https://www.linkedin.com/in/alexey-pylypenko-177b54239/">Linkedin page</a>
-	<input type="password" placeholder="Enter a password" [value]="" (keyup)="validatePassword($event)">
-	<div class="strength">
-		<span class={{passwordStatus[0]}}></span>
-		<span class={{passwordStatus[1]}}></span>
-		<span class={{passwordStatus[2]}}></span>
-	</div>
+	<h2>Test task made by Pylypenko Alexey</h2>
+	<a href="https://www.linkedin.com/in/alexey-pylypenko-177b54239/">Linkedin page</a>
+	<form class="strength" [formGroup]="formGroup">
+		<app-costom-input [formControlName]="'customInput'"></app-costom-input>
+		<div class="strength__group">
+			<span class={{someAction()[0]}}></span>
+			<span class={{someAction()[1]}}></span>
+			<span class={{someAction()[2]}}></span>
+		</div>
+	</form>
 </div>

@@ -1,38 +1,20 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 
 export class AppComponent {
+  public formGroup = new FormGroup({
+    customInput: new FormControl('')
+  });
   title = 'validation-password';
-  passwordStatus = ['', '', ''];
-
-  validatePassword = (ev: any) => {
-    if (!ev.target.value || ev.target.value === '' || ev.target.value === ' ') {
-      this.passwordStatus = this.passwordStatus.map(item => item = '');
-    } else if (ev.target.value.length < 8) {
-      this.passwordStatus = this.passwordStatus.map(item => item = 'red');
-    } else if (ev.target.value.length >= 8) {
-      this.passwordStatus = this.passwordStatus.map(item => item = '');
-
-      if (/[a-zA-Z]+/g.test(ev.target.value)
-        || /[0-9]+/g.test(ev.target.value)
-        || /[@$-\/:-?{-~!"^_`\[\]]+/g.test(ev.target.value)) {
-        this.passwordStatus[0] = 'red';
-
-        if (/[a-zA-Z]+/g.test(ev.target.value) && /[0-9]+/g.test(ev.target.value)
-          || /[a-zA-Z]+/g.test(ev.target.value) && /[@$-\/:-?{-~!"^_`\[\]]+/g.test(ev.target.value)
-          || /[@$-\/:-?{-~!"^_`\[\]]+/g.test(ev.target.value) && /[0-9]+/g.test(ev.target.value)) {
-          this.passwordStatus = this.passwordStatus.map((item, i) => i !== 2 ? item = 'yellow' : item = '');
-
-          if (/[a-zA-Z]+/g.test(ev.target.value) && /[0-9]+/g.test(ev.target.value) && /[@$-\/:-?{-~!"^_`\[\]]+/g.test(ev.target.value)) {
-            this.passwordStatus = this.passwordStatus.map(item => item = 'green');
-          }
-        }
-      }
-    }
+  someAction() {
+    let tmp = `${this.formGroup.value.customInput}`.split('.');
+    return(tmp);
   }
 }
